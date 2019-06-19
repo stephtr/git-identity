@@ -14,10 +14,16 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.helloWorld",
-			"title": "Hello World"
-		}]
+		"configuration": {
+			"title": "Git-Identity configuration",
+			"properties": {
+				"git-identity.authors": {
+					"type": "array",
+					"default": [],
+					"description": "Available Git authors (each entry should be of the form 'John Doe john@doe.com')"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

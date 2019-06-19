@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"workspaceContains:.git"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

@@ -18,7 +18,7 @@ async function getGitConfigEntry(key: string, repoDir?: string): Promise<string>
 
 function setGitConfigEntry(key: string, value: string, repoDir?: string): Promise<{}> {
     const location = repoDir ? 'local' : 'global';
-    return exec(`git config --${location} ${key} "${value.replace('"', '""')}"`, { cwd: repoDir });
+    return exec(`git config --${location} ${key} "${value.replace('"', '""')}"`, { timeout: 1000, windowsHide: true, cwd: repoDir });
 }
 
 export function getCurrentUser(): Promise<string> {

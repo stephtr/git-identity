@@ -1,8 +1,8 @@
 {
 	"name": "git-identity",
 	"displayName": "Git-Identity",
-	"description": "Adds a button to easily switch between different Git identities",
-	"version": "0.0.1",
+	"description": "This VS Code extension adds a button to easily switch between different Git authors.",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.35.0"
 	},

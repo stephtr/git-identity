@@ -1,22 +1,33 @@
 import { exec } from './exec';
 import { Author } from './extension';
+import * as vscode from 'vscode';
 
-async function getGitConfigEntry(key: string): Promise<string> {
-    const { stdout, stderr } = await exec(`git config --get ${key}`, { timeout: 1000, windowsHide: true });
+
+function getWorkspaceDir(): string | undefined {
+    const folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length === 1) {
+        return folders[0].uri.fsPath;
+    }
+}
+
+async function getGitConfigEntry(key: string, repoDir?: string): Promise<string> {
+    const { stdout, stderr } = await exec(`git config --get ${key}`, { timeout: 1000, windowsHide: true, cwd: repoDir });
     // TODO: error handling
     return stdout.replace('\r', '').replace('\n', '');
 }
 
-function setGitConfigEntry(key: string, value: string, local: boolean = false): Promise<{}> {
-    const location = local ? 'local' : 'global';
-    return exec(`git config --${location} ${key} "${value.replace('"', '""')}"`);
+function setGitConfigEntry(key: string, value: string, repoDir?: string): Promise<{}> {
+    const location = repoDir ? 'local' : 'global';
+    return exec(`git config --${location} ${key} "${value.replace('"', '""')}"`, { cwd: repoDir });
 }
 
 export function getCurrentUser(): Promise<string> {
-    return getGitConfigEntry('user.name');
+    const repoDir = getWorkspaceDir();
+    return getGitConfigEntry('user.name', repoDir);
 }
 
 export async function setCurrentUser(author: Author): Promise<void> {
-    await setGitConfigEntry('user.name', author.name, true);
-    await setGitConfigEntry('user.email', author.email, true);
+    const repoDir = getWorkspaceDir();
+    await setGitConfigEntry('user.name', author.name, repoDir);
+    await setGitConfigEntry('user.email', author.email, repoDir);
 }

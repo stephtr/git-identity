@@ -1,7 +1,5 @@
-import { exec as exec_orig } from 'child_process';
-import { promisify } from 'util';
+import { exec } from './exec';
 import { Author } from './extension';
-const exec = promisify(exec_orig);
 
 async function getGitConfigEntry(key: string): Promise<string> {
     const { stdout, stderr } = await exec(`git config --get ${key}`, { timeout: 1000, windowsHide: true });

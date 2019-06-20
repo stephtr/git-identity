@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { getCurrentUser, setCurrentUser } from './git';
-import { getAuthors, addAuthor } from './authorSettings';
+import { getAuthors, addAuthor, quickValidateEmail } from './authorSettings';
 
 export interface Author {
 	name: string;

@@ -1,0 +1,29 @@
+{
+    "rootDir": ".",
+    "transform": {
+        "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": "tests/.*\\.ts$",
+    "testPathIgnorePatterns": [
+        "<rootDir>/node_modules/"
+    ],
+    "moduleFileExtensions": [
+        "ts",
+        "js"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+        "json",
+        "lcov",
+        "text",
+        "html"
+    ],
+    "coveragePathIgnorePatterns": [
+        "<rootDir>/node_modules/"
+    ],
+    "globals": {
+        "ts-jest": {
+            "tsConfig": "tsconfig.json"
+        }
+    }
+}

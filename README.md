@@ -1,4 +1,4 @@
-# git-identity
+# Git-Identity switcher
 
 This VS Code extension adds a button to easily switch between different Git authors.
 

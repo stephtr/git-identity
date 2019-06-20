@@ -1,9 +1,17 @@
 {
 	"name": "git-identity",
-	"displayName": "Git-Identity",
+	"displayName": "Git-Identity switcher",
 	"description": "Adds a button to easily switch between different Git authors",
 	"version": "1.0.0",
+	"license": "MIT",
 	"publisher": "stephtr",
+	"keywords": [
+		"Git",
+		"author",
+		"user",
+		"switch",
+		"identity"
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/stephtr/git-identity"
@@ -25,7 +33,7 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "Git-Identity configuration",
+			"title": "Git-Identity switcher configuration",
 			"properties": {
 				"git-identity.authors": {
 					"type": "array",

@@ -7,8 +7,9 @@ async function getGitConfigEntry(key: string): Promise<string> {
     return stdout.replace('\r', '').replace('\n', '');
 }
 
-function setGlobalGitConfigEntry(key: string, value: string): Promise<{}> {
-    return exec(`git config --global ${key} "${value.replace('"', '""')}"`);
+function setGitConfigEntry(key: string, value: string, local: boolean = false): Promise<{}> {
+    const location = local ? 'local' : 'global';
+    return exec(`git config --${location} ${key} "${value.replace('"', '""')}"`);
 }
 
 export function getCurrentUser(): Promise<string> {
@@ -16,6 +17,6 @@ export function getCurrentUser(): Promise<string> {
 }
 
 export async function setCurrentUser(author: Author): Promise<void> {
-    await setGlobalGitConfigEntry('user.name', author.name);
-    await setGlobalGitConfigEntry('user.email', author.email);
+    await setGitConfigEntry('user.name', author.name, true);
+    await setGitConfigEntry('user.email', author.email, true);
 }

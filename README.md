@@ -2,6 +2,8 @@
 
 This VS Code extension adds a button to easily switch between different Git authors.
 
+<img src="https://github.com/stephtr/git-identity/raw/master/images/logo.png" alt="Logo" width="250">
+
 ## Features
 
 If multiple people are sharing a single operating system user account and are working on the same Git repository, it is hard to keep track of their individual contributions.
@@ -14,10 +16,6 @@ For such cases this extension adds a button to the VS Code status bar displaying
 This extension contributes the following settings:
 
 * `git-identity.authors`: available Git authors (each array entry should be of the form 'John Doe john@doe.com')
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
 ## Release Notes
 

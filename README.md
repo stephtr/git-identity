@@ -2,7 +2,7 @@
 
 This VS Code extension adds a button to easily switch between different Git authors.
 
-<img src="https://github.com/stephtr/git-identity/raw/master/images/logo.png" alt="Logo" width="250">
+<img src="https://github.com/stephtr/git-identity/raw/master/images/logo.png" alt="Logo" width="100">
 
 ## Features
 

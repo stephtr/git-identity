@@ -2,6 +2,7 @@
 out/test/**
 src/**
 tests/**
+coverage/**
 .gitignore
 **/tsconfig.json
 **/tsconfig.test.json
@@ -10,3 +11,4 @@ tests/**
 **/*.map
 **/*.ts
 images/**
+!images/logo.png

@@ -2,8 +2,6 @@
 
 This VS Code extension adds a button to easily switch between different Git authors.
 
-<img src="https://github.com/stephtr/git-identity/raw/master/images/logo.png" alt="Logo" width="100">
-
 ## Features
 
 If multiple people are sharing a single operating system user account and are working on the same Git repository, it is hard to keep track of their individual contributions.

@@ -3,7 +3,7 @@
     "transform": {
         "^.+\\.(ts|tsx)$": "ts-jest"
     },
-    "testRegex": "tests/.*\\.ts$",
+    "testRegex": "tests/.*\\.test\\.ts$",
     "testPathIgnorePatterns": [
         "<rootDir>/node_modules/"
     ],
@@ -23,7 +23,7 @@
     ],
     "globals": {
         "ts-jest": {
-            "tsConfig": "tsconfig.json"
+            "tsConfig": "tsconfig.test.json"
         }
     }
 }

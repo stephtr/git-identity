@@ -25,8 +25,10 @@ export function getAuthors(): Author[] {
 
 export function addAuthor(author: Author) {
 	const configuration = vscode.workspace.getConfiguration('git-identity');
-	const authorStrings = configuration.get<string[]>('authors');
-	if (!authorStrings) { return; }
+	let authorStrings = configuration.get<string[]>('authors');
+	if (!authorStrings) {
+		authorStrings = [];
+	}
 	authorStrings.push(`${author.name} ${author.email}`);
 	configuration.update('authors', authorStrings, true);
 }

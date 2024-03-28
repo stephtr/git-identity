@@ -1,4 +1,4 @@
-import { getCurrentUser, setCurrentUser } from '../src/git';
+import { getCurrentUserName, setCurrentUser } from '../src/git';
 
 jest.mock('../src/exec', () => ({
     exec: jest.fn()
@@ -15,7 +15,7 @@ describe('Git utilities', () => {
     it('should get the current user', async () => {
         const fakeUser = 'John Doe';
         (exec as jest.Mock<any>).mockReturnValueOnce(Promise.resolve({ stdout: fakeUser + '\r\n', stderr: '' }));
-        expect(await getCurrentUser()).toEqual(fakeUser);
+        expect(await getCurrentUserName()).toEqual(fakeUser);
         const executedCommand = (exec as jest.Mock<any>).mock.calls[0][0] as string;
         expect(executedCommand).toContain('git config');
         expect(executedCommand).toContain(' --get user.name');
@@ -33,7 +33,7 @@ describe('Git utilities', () => {
         ];
         commands.forEach(cmd => {
             expect(cmd).toContain('git config');
-            expect(cmd).not.toContain('--set'); 
+            expect(cmd).not.toContain('--set');
         });
         expect(commands.join('|')).toContain(`user.name "${author.name}"`);
         expect(commands.join('|')).toContain(`user.email "${author.email}"`);

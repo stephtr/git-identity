@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { getCurrentUser, setCurrentUser } from './git';
-import { getAuthors, addAuthor, quickValidateEmail } from './authorSettings';
+import { getCurrentUserName, getCurrentUserEmail, setCurrentUser } from './git';
+import { getAuthors, addAuthor, quickValidateEmail, getShowEmailSetting } from './settings';
 
 export interface Author {
 	name: string;
@@ -10,13 +10,17 @@ export interface Author {
 let statusbarItem: vscode.StatusBarItem;
 
 async function updateName() {
-	const name = await getCurrentUser();
-	statusbarItem.text = `$(person-filled) ${name}`;
-	if (name) {
-		statusbarItem.show();
-	} else {
-		statusbarItem.hide();
-	}
+    const name = await getCurrentUserName();
+    const showEmail = getShowEmailSetting();
+
+    let statusBarText = `$(person-filled) ${name}`;
+    if (showEmail) {
+        const email = await getCurrentUserEmail();
+        statusBarText += ` (${email})`;
+    }
+
+    statusbarItem.text = statusBarText;
+    statusbarItem[`${name ? 'show' : 'hide'}`]();
 }
 
 const switchAuthorCommand = 'git-identity.switchAuthor';

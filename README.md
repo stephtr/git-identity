@@ -14,6 +14,7 @@ For such cases this extension adds a button to the VS Code status bar displaying
 This extension contributes the following settings:
 
 * `git-identity.authors`: available Git authors (each array entry should be of the form 'John Doe john@doe.com')
+* `git-identity.showEmail`: Display the email address of the current author in the status bar.
 
 ## Release Notes
 

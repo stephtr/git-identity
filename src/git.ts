@@ -21,9 +21,12 @@ function setGitConfigEntry(key: string, value: string, repoDir?: string): Promis
     return exec(`git config --${location} ${key} "${value.replace('"', '""')}"`, { timeout: 1000, windowsHide: true, cwd: repoDir });
 }
 
-export function getCurrentUser(): Promise<string> {
+export function getCurrentUser(): Promise<Author> {
     const repoDir = getWorkspaceDir();
-    return getGitConfigEntry('user.name', repoDir);
+    return Promise.all([
+        getGitConfigEntry('user.name', repoDir),
+        getGitConfigEntry('user.email', repoDir)
+    ]).then(([name, email]) => ({ name, email }));
 }
 
 export async function setCurrentUser(author: Author): Promise<void> {

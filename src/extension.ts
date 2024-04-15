@@ -12,7 +12,7 @@ let statusbarItem: vscode.StatusBarItem;
 async function updateName() {
 	const currentUser = await getCurrentUser();
 	const potentialAuthors = getAuthors();
-	const showEmail = potentialAuthors.filter(a => a.name === currentUser.name).length > 1;
+	const showEmail = potentialAuthors.filter(a => a.name === currentUser.name && a.email !== currentUser.email).length > 0;
 	// Additionally, show the email if the user has multiple emails
 	statusbarItem.text = `$(person-filled) ${currentUser.name}${showEmail ? ` (${currentUser.email})` : ''}`;
 	if (currentUser.name) {

@@ -2,7 +2,7 @@
 	"name": "git-identity",
 	"displayName": "Git-Identity switcher",
 	"description": "Adds a button to easily switch between different Git authors",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"license": "MIT",
 	"publisher": "stephtr",
 	"keywords": [
@@ -28,7 +28,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"workspaceContains:.git"
+		"workspaceContains:.git",
+		"workspaceContains:.gitignore"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

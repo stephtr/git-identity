@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2024-04-15
+
+- The extension also activates, if a `.gitignore` file is present in the workspace.
+
 ## [1.1.0] - 2024-04-15
 
 - In case the currently selected author has multiple profiles, also show the email address (thanks to Wesztman!)

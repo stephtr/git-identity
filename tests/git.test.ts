@@ -5,6 +5,7 @@ jest.mock('../src/exec', () => ({
 }));
 
 import { exec } from '../src/exec';
+import { Author } from '../src/extension';
 
 describe('Git utilities', () => {
 
@@ -13,9 +14,14 @@ describe('Git utilities', () => {
     });
 
     it('should get the current user', async () => {
-        const fakeUser = 'John Doe';
-        (exec as jest.Mock<any>).mockReturnValueOnce(Promise.resolve({ stdout: fakeUser + '\r\n', stderr: '' }));
-        expect(await getCurrentUserName()).toEqual(fakeUser);
+        const fakeUser: Author = { name: 'John Doe', email: 'john@example.com' };
+        (exec as jest.Mock<any>).mockImplementation((command) => {
+            switch (command) {
+                case 'git config --get user.name': return Promise.resolve({ stdout: fakeUser.name + '\r\n', stderr: '' });
+                case 'git config --get user.email': return Promise.resolve({ stdout: fakeUser.email + '\r\n', stderr: '' });
+            }
+        })
+        expect(await getCurrentUser()).toEqual(fakeUser);
         const executedCommand = (exec as jest.Mock<any>).mock.calls[0][0] as string;
         expect(executedCommand).toContain('git config');
         expect(executedCommand).toContain(' --get user.name');

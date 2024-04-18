@@ -10,17 +10,16 @@ export interface Author {
 let statusbarItem: vscode.StatusBarItem;
 
 async function updateName() {
-    const name = await getCurrentUserName();
-    const showEmail = getShowEmailSetting();
-
-    let statusBarText = `$(person-filled) ${name}`;
-    if (showEmail) {
-        const email = await getCurrentUserEmail();
-        statusBarText += ` (${email})`;
-    }
-
-    statusbarItem.text = statusBarText;
-    statusbarItem[`${name ? 'show' : 'hide'}`]();
+	const currentUser = await getCurrentUser();
+	const potentialAuthors = getAuthors();
+	const showEmail = potentialAuthors.filter(a => a.name === currentUser.name && a.email !== currentUser.email).length > 0;
+	// Additionally, show the email if the user has multiple emails
+	statusbarItem.text = `$(person-filled) ${currentUser.name}${showEmail ? ` (${currentUser.email})` : ''}`;
+	if (currentUser.name) {
+		statusbarItem.show();
+	} else {
+		statusbarItem.hide();
+	}
 }
 
 const switchAuthorCommand = 'git-identity.switchAuthor';

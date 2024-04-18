@@ -1,7 +1,12 @@
 {
     "rootDir": ".",
     "transform": {
-        "^.+\\.(ts|tsx)$": "ts-jest"
+        "^.+\\.(ts|tsx)$": [
+            "ts-jest",
+            {
+                "tsconfig": "tsconfig.test.json"
+            }
+        ]
     },
     "testRegex": "tests/.*\\.test\\.ts$",
     "testPathIgnorePatterns": [
@@ -20,10 +25,5 @@
     ],
     "coveragePathIgnorePatterns": [
         "<rootDir>/node_modules/"
-    ],
-    "globals": {
-        "ts-jest": {
-            "tsConfig": "tsconfig.test.json"
-        }
-    }
+    ]
 }

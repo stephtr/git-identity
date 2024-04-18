@@ -2,7 +2,7 @@
 	"name": "git-identity",
 	"displayName": "Git-Identity switcher",
 	"description": "Adds a button to easily switch between different Git authors",
-	"version": "1.1.2",
+	"version": "1.2.0",
 	"license": "MIT",
 	"publisher": "stephtr",
 	"keywords": [

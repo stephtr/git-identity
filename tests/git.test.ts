@@ -1,4 +1,4 @@
-import { getCurrentUserName, setCurrentUser } from '../src/git';
+import { getCurrentUser, setCurrentUser } from '../src/git';
 
 jest.mock('../src/exec', () => ({
     exec: jest.fn()

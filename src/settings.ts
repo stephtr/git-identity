@@ -32,3 +32,15 @@ export function addAuthor(author: Author) {
 	authorStrings.push(`${author.name} ${author.email}`);
 	configuration.update('authors', authorStrings, true);
 }
+
+export function getShowEmailSetting(): 'always' | 'whenMultiple' | 'never' {
+	const choice = vscode.workspace.getConfiguration('git-identity').get<string>('showEmail', "");
+	switch (choice) {
+		case 'always':
+			return 'always';
+		case 'never':
+			return 'never';
+		default:
+			return 'whenMultiple';
+	}
+}

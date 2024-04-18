@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { getCurrentUser, setCurrentUser } from './git';
-import { getAuthors, addAuthor, quickValidateEmail } from './authorSettings';
+import { getAuthors, addAuthor, quickValidateEmail, getShowEmailSetting } from './settings';
 
 export interface Author {
 	name: string;
@@ -12,7 +12,10 @@ let statusbarItem: vscode.StatusBarItem;
 async function updateName() {
 	const currentUser = await getCurrentUser();
 	const potentialAuthors = getAuthors();
-	const showEmail = potentialAuthors.filter(a => a.name === currentUser.name && a.email !== currentUser.email).length > 0;
+	const authorHasMultipleAccounts = potentialAuthors.filter(a => a.name === currentUser.name && a.email !== currentUser.email).length > 0;
+
+	const showEmailSetting = getShowEmailSetting();
+	const showEmail = showEmailSetting === 'always' || (showEmailSetting === 'whenMultiple' && authorHasMultipleAccounts);
 	// Additionally, show the email if the user has multiple emails
 	statusbarItem.text = `$(person-filled) ${currentUser.name}${showEmail ? ` (${currentUser.email})` : ''}`;
 	if (currentUser.name) {
@@ -55,6 +58,12 @@ export async function activate(context: vscode.ExtensionContext) {
 	statusbarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
 	context.subscriptions.push(statusbarItem);
 	statusbarItem.command = switchAuthorCommand;
+
+	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
+		if (e.affectsConfiguration("git-identity.showEmail")) {
+			updateName();
+		}
+	}));
 
 	updateName();
 	const updateTimer = setInterval(updateName, 10000);

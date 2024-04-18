@@ -40,6 +40,16 @@
 					"type": "array",
 					"default": [],
 					"description": "Available Git authors (each entry should be of the form 'John Doe john@doe.com')"
+				},
+				"git-identity.showEmail": {
+					"type": "string",
+					"default": "for identical names",
+					"enum": [
+						"always",
+						"for identical names",
+						"never"
+					],
+					"description": "Display the email address of the current author in the status bar"
 				}
 			}
 		}
